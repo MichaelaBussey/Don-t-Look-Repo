@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     public float movespeed;
     public float percentMod; //between 0 and 1
+   
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical") * percentMod;
     }
