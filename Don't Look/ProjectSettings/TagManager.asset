@@ -6,6 +6,8 @@ TagManager:
   tags:
   - lightboxcollider
   - light
+  - TEXT2COL
+  - PAUSECOL
   layers:
   - Default
   - TransparentFX

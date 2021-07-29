@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public float movespeed;
     public float percentMod; //between 0 and 1
     public Animator player_animator;
+    public GameObject Text1, Text2, PauseUI;
+
 
     void Start()
     {
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical") * percentMod;
 
@@ -36,5 +38,23 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * movespeed * Time.deltaTime);
+    }
+
+    void OnTriggerEnter2D(Collider2D col) 
+    {
+
+            if (col.gameObject.tag == "TEXT2COL")
+            {
+                print("Walk");
+                Destroy(Text1);
+                Text2.SetActive(true);
+            }
+
+            if (col.gameObject.tag == "PAUSECOL")
+            {
+                Destroy(Text2);
+                PauseUI.SetActive(true);
+            }
+
     }
 }
