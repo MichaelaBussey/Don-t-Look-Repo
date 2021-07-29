@@ -28,7 +28,7 @@ public class Anxiety_Meter : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (anxietyCurrent >= 20)
+        if (anxietyCurrent >= anxietyMaxAmount)
         {
             Losescreen.SetActive(true);
             Time.timeScale = 0.0f;
@@ -53,7 +53,8 @@ public class Anxiety_Meter : MonoBehaviour
 
         if (collision.gameObject.tag == "light")
         {
-            environmentinfluence = -1;
+            environmentinfluence = -5;
+            this.gameObject.GetComponent<DetectionCircle>().underLight = true;
             Debug.Log("Inlight");
         }
 
@@ -69,6 +70,7 @@ public class Anxiety_Meter : MonoBehaviour
         if (collision.gameObject.tag == "light")
         {
             environmentinfluence = +2;
+            this.gameObject.GetComponent<DetectionCircle>().underLight = false;
             Debug.Log("OffLight");
         }
     }

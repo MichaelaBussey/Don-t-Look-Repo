@@ -12,12 +12,13 @@ public class DetectionCircle : MonoBehaviour
     //public List<GameObject> nearbyEnemies = new List<GameObject>();
 
     public bool lightOn;
-
+    public bool underLight;
 
     // Start is called before the first frame update
     void Start()
     {
         lightOn = false;
+        underLight = true;
     }
 
     public void Update()
@@ -40,29 +41,32 @@ public class DetectionCircle : MonoBehaviour
             desiredRad = viewRadius;
         }
 
-
-        //checks if there are any enemies within the detection circle - i need to collect a list/array of all colliders
-        Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(transform.position, desiredRad, enemymask);
-
-
-        for (int i = 0; i < nearbyEnemies.Length; i++)
+        if (!underLight)
         {
-            GameObject anEnemy = nearbyEnemies[i].gameObject;
 
-            //if ()
-            //{
-                
-            //}
+            //checks if there are any enemies within the detection circle - i need to collect a list/array of all colliders
+            Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(transform.position, desiredRad, enemymask);
 
-            if (anEnemy.GetComponent<Enemy>().type == Enemy.EnemyType.STALKER)
+
+            for (int i = 0; i < nearbyEnemies.Length; i++)
             {
-                
-                {
-                    Vector3 playerpos = this.transform.position;
-                    anEnemy.GetComponent<Enemy>().StalkPlayer(playerpos);
-                }
-            }
+                GameObject anEnemy = nearbyEnemies[i].gameObject;
 
+                //if ()
+                //{
+
+                //}
+
+                if (anEnemy.GetComponent<Enemy>().type == Enemy.EnemyType.STALKER)
+                {
+
+                    {
+                        Vector3 playerpos = this.transform.position;
+                        anEnemy.GetComponent<Enemy>().StalkPlayer(playerpos);
+                    }
+                }
+
+            }
         }
 
 

@@ -39,7 +39,10 @@ public class Enemy : MonoBehaviour
     public void Start()
     {
         state = AIState.IDLE;
-        Scan();
+        if (type != EnemyType.LURKER)
+        {
+            Scan();
+        }
     }
 
     public void Update()
