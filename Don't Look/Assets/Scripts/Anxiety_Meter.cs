@@ -5,24 +5,33 @@ using UnityEngine.UI;
 
 public class Anxiety_Meter : MonoBehaviour
 {
-    private float anxietyCurrent = 10; //This is the number which will be changed.
-    private float anxietyFillAmount; //Used to hold the percentage.
-    private float anxietyMaxAmount = 20; //This is the max number possible.
+    public float anxietyCurrent = 10; //This is the number which will be changed.
+    public float anxietyFillAmount; //Used to hold the percentage.
+    public float anxietyMaxAmount = 20; //This is the max number possible.
     public Image anxietyBar;
+
+
+
+    public float enemyinfluence;
+    public float environmentinfluence;
 
     void Start()
     {
-        InvokeRepeating("AnxietyIncrease", 0f, 1.0f); //AnxietyIncrease is the method where the code increases anxiety. Will call this method once per second
+        enemyinfluence = 0;
+        environmentinfluence = 1;
+
+        InvokeRepeating("AnxietyController", 0f, 1.0f); //AnxietyController is the method where the code increases anxiety. Will call this method once per second
         
     }
 
     public void FixedUpdate()
     {
-        if (IsEnemy == true)
-        {
-            InvokeRepeating("EnemyAnxietyIncrease", 0f, 1.0f);
-        }
+        
+        AnxietyChange();
     }
+
+    
+   
 
     public void AnxietyChange()
     {
@@ -30,31 +39,17 @@ public class Anxiety_Meter : MonoBehaviour
         anxietyBar.fillAmount = anxietyFillAmount / 1; //Alters Image;
     }
 
-    public void AnxietyIncrease()
+    
+
+
+
+    public void AnxietyController()
     {
-        anxietyCurrent += 1;
+        anxietyCurrent += enemyinfluence + environmentinfluence;
+
+        
+        
     }
 
-    public void EnemyAnxietyIncrease()
-    {
-        anxietyCurrent += 1;
-    }
 
-
-    //if (inContactWithEnemy == true)
-    //{
-    //anxietyCurrent += 1;
-    //}
-
-    //in fixedUpdate
-
-    //{
-    //  anxietyCurrent += 1 once per second;
-    //}
-
-    //if (light contact == true)
-    //{
-    //  anxietyCurrent -= 3;
-    //}
-    //}
 }
