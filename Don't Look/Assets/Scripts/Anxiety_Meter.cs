@@ -10,13 +10,15 @@ public class Anxiety_Meter : MonoBehaviour
     public float anxietyMaxAmount = 20; //This is the max number possible.
     public Image anxietyBar;
 
-
+    public GameObject Winscreen;
+    public GameObject Losescreen;
 
     public float enemyinfluence;
     public float environmentinfluence;
 
     void Start()
     {
+        Time.timeScale = 1f;
         enemyinfluence = 0;
         environmentinfluence = 1;
 
@@ -26,12 +28,14 @@ public class Anxiety_Meter : MonoBehaviour
 
     public void FixedUpdate()
     {
-        
+        if (anxietyCurrent >= 20)
+        {
+            Losescreen.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
+
         AnxietyChange();
     }
-
-    
-   
 
     public void AnxietyChange()
     {
@@ -39,16 +43,9 @@ public class Anxiety_Meter : MonoBehaviour
         anxietyBar.fillAmount = anxietyFillAmount / 1; //Alters Image;
     }
 
-    
-
-
-
     public void AnxietyController()
     {
         anxietyCurrent += enemyinfluence + environmentinfluence;
-
-        
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,13 +56,19 @@ public class Anxiety_Meter : MonoBehaviour
             environmentinfluence = -1;
             Debug.Log("Inlight");
         }
+
+        if (collision.gameObject.tag == "win")
+        {
+            Winscreen.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "light")
         {
-            environmentinfluence = +1;
+            environmentinfluence = +2;
             Debug.Log("OffLight");
         }
     }

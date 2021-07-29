@@ -82,8 +82,16 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Idle());
         }
 
-    }
 
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+                Anxiety_Meter anxiety_Meter = GameObject.FindWithTag("Player").GetComponent<Anxiety_Meter>();
+                anxiety_Meter.anxietyCurrent = 18;
+        }
+    }
 
     public void Scan()
     {
