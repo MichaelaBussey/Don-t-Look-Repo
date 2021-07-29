@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3789093997853399246}
   - component: {fileID: 3789093997853399245}
   - component: {fileID: 3789093997853399234}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,8 @@ MonoBehaviour:
   raymask:
     serializedVersion: 2
     m_Bits: 256
-  walkspeed: 0.5
+  playerposition: {x: 0, y: 0, z: 0}
+  walkspeed: 1.5
   modifier: 0.3
   type: 0
   movedistance: 0

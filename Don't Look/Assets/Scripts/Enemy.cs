@@ -11,13 +11,15 @@ public class Enemy : MonoBehaviour
     //needs a capsule collider (or not?) and a rigidbody2d with gravity turned off
     //set raymask to level mask
 
-    public enum AIState { PATROL, IDLE }
+    public enum AIState { PATROL, IDLE, STALK }
     public enum EnemyType { LURKER, STALKER, REACTOR }
 
     [Header("References")]
     public AIState state;
     public Transform one, two, three, four; //the four nodes at their feet. In order: bottom left, bottom right, top right, top left.
     public LayerMask raymask;
+
+    public Vector3 playerposition;
 
     [Header("Set Variables")] //variables that need to be toggled in inspector
     public float walkspeed;
@@ -43,7 +45,7 @@ public class Enemy : MonoBehaviour
     public void Update()
     {
         //controls when the enemy should be moving or not moving
-        if (state == AIState.PATROL)
+        if (state == AIState.PATROL || state == AIState.STALK)
         {
             speed = walkspeed;
         }
@@ -58,17 +60,26 @@ public class Enemy : MonoBehaviour
         {
             this.transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
+        else if (state == AIState.STALK)
+        {
+            this.transform.position = Vector3.MoveTowards(transform.position, playerposition, speed * Time.deltaTime);
+        }
 
 
         //checks whether the enemy has reached their desired location or not
-        if (transform.position == target)
+        if (state == AIState.PATROL && transform.position == target)
         {
-            if (state == AIState.PATROL)
-            {
-                state = AIState.IDLE;
-                StartCoroutine(Idle());
-            }
 
+
+            state = AIState.IDLE;
+            StartCoroutine(Idle());
+
+
+        }
+        else if (state == AIState.STALK && transform.position == playerposition)
+        {
+            state = AIState.IDLE;
+            StartCoroutine(Idle());
         }
 
     }
@@ -184,7 +195,72 @@ public class Enemy : MonoBehaviour
 
         yield return new WaitForSeconds(idletimer);
 
-        Scan();
+        if (state != AIState.STALK)
+        {
+            Scan();
+        }
+
+
+    }
+
+
+    public void StalkPlayer(Vector3 playertransform)
+    {
+
+
+
+        //casts 4 rays from the feet position of enemy to the player, to see if there are any level elements in the way
+
+        int rayhit = 0;
+        RaycastHit2D hit, hit2, hit3, hit4;
+
+        var direction = playertransform - one.transform.position;
+        hit = Physics2D.Raycast(one.position, direction, Vector2.Distance(playertransform, one.position), raymask);
+
+        if (hit.collider == null)
+        {
+            rayhit += 1;
+        }
+
+        direction = playertransform - two.transform.position;
+        hit2 = Physics2D.Raycast(two.position, direction, Vector2.Distance(playertransform, two.position), raymask);
+
+        if (hit2.collider == null)
+        {
+            rayhit += 1;
+        }
+
+
+        direction = playertransform - three.transform.position;
+        hit3 = Physics2D.Raycast(three.position, direction, Vector2.Distance(playertransform, three.position), raymask);
+
+        if (hit3.collider == null)
+        {
+            rayhit += 1;
+        }
+
+        direction = playertransform - four.transform.position;
+        hit4 = Physics2D.Raycast(four.position, direction, Vector2.Distance(playertransform, four.position), raymask);
+
+        if (hit4.collider == null)
+        {
+            rayhit += 1;
+        }
+
+
+        if (rayhit == 4)
+        {
+
+            if (state != AIState.STALK)
+            {
+                state = AIState.STALK;
+            }
+            playerposition = playertransform;
+
+
+
+        }
+
 
 
     }
