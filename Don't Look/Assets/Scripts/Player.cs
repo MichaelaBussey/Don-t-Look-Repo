@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     public float movespeed;
     public float percentMod; //between 0 and 1
-   
+    public Animator player_animator;
 
     void Start()
     {
@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
       
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical") * percentMod;
+
+        player_animator.SetFloat("Horizontal", movement.x);
+        player_animator.SetFloat("Vertical", movement.y);
+        player_animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     void FixedUpdate()
