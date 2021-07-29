@@ -49,12 +49,15 @@ public class DetectionCircle : MonoBehaviour
         {
             GameObject anEnemy = nearbyEnemies[i].gameObject;
 
+            //if ()
+            //{
+                
+            //}
+
             if (anEnemy.GetComponent<Enemy>().type == Enemy.EnemyType.STALKER)
             {
-
-
+                
                 {
-
                     Vector3 playerpos = this.transform.position;
                     anEnemy.GetComponent<Enemy>().StalkPlayer(playerpos);
                 }
