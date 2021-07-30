@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical") * percentMod;
 
         //decreases diagonal movement if there is no 0 on one of the axes.
-        if (diagTest)
+        
         {
 
             if (movement.x != 0 && movement.y != 0)
