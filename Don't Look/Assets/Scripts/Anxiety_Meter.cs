@@ -19,7 +19,7 @@ public class Anxiety_Meter : MonoBehaviour
     public float shadowCD;
     public float maxCD;
 
-    public AudioSource PlayerFootstep;
+    
 
 
     void Start()
@@ -32,10 +32,7 @@ public class Anxiety_Meter : MonoBehaviour
         
     }
 
-    public void Footstep()
-    {
-        PlayerFootstep.Play();
-    }
+    
 
     public void Update()
     {
