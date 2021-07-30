@@ -11,7 +11,11 @@ public class TextsandPause : MonoBehaviour
 
     public void Start()
     {
+        if (help != null)
+        { 
+
         help.SetActive(false);
+    }
     }
     void Update()
     {

@@ -18,7 +18,7 @@ public class DetectionCircle : MonoBehaviour
     void Start()
     {
         lightOn = false;
-        underLight = true;
+        underLight = false;
     }
 
     public void Update()

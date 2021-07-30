@@ -49,13 +49,16 @@ public class Player : MonoBehaviour
                 print("Walk");
                 Destroy(Text1);
                 Text2.SetActive(true);
+            Destroy(col);
+            
             }
 
             if (col.gameObject.tag == "PAUSECOL")
             {
                 Destroy(Text2);
                 PauseUI.SetActive(true);
-            }
+            Destroy(col);
+        }
 
     }
 }
