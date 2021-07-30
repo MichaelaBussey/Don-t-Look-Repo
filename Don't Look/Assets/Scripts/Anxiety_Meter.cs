@@ -19,6 +19,9 @@ public class Anxiety_Meter : MonoBehaviour
     public float shadowCD;
     public float maxCD;
 
+    public AudioSource PlayerFootstep;
+
+
     void Start()
     {
         Time.timeScale = 1f;
@@ -27,6 +30,11 @@ public class Anxiety_Meter : MonoBehaviour
 
         InvokeRepeating("AnxietyController", 0f, 0.25f); //AnxietyController is the method where the code increases anxiety. Will call this method once per second
         
+    }
+
+    public void Footstep()
+    {
+        PlayerFootstep.Play();
     }
 
     public void Update()
@@ -69,6 +77,7 @@ public class Anxiety_Meter : MonoBehaviour
     public void AnxietyController()
     {
         anxietyCurrent += 0.25f * (enemyinfluence + environmentinfluence);
+
 
         if (anxietyCurrent > anxietyMaxAmount)
         { 
