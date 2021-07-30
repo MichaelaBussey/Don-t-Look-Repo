@@ -19,13 +19,7 @@ public class TextsandPause : MonoBehaviour
     }
     void Update()
     {
-        //causes all objects to freeze
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Time.timeScale = 0.00001f;
-            PausePhone.SetActive(true);
-
-        }
+        
     }
 
     public void howtoplay()
@@ -53,6 +47,7 @@ public class TextsandPause : MonoBehaviour
     {
         Time.timeScale = 1f;
         PauseUI.SetActive(false);
+        PausePhone.SetActive(true);
     }
 
 

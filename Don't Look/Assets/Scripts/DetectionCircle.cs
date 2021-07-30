@@ -41,7 +41,7 @@ public class DetectionCircle : MonoBehaviour
             desiredRad = viewRadius;
         }
 
-        if (!underLight)
+        
         {
 
             //checks if there are any enemies within the detection circle - i need to collect a list/array of all colliders
