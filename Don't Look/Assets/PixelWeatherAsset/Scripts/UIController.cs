@@ -31,15 +31,15 @@ public class UIController : MonoBehaviour
         {
             rainObject.SetActive(true);
             rainSliders.SetActive(true);
-            snowSliders.SetActive(false);
-            snowObject.SetActive(false);
+            //snowSliders.SetActive(false);
+            //snowObject.SetActive(false);
         }
         else if (type == 1)
         {
             rainObject.SetActive(false);
             rainSliders.SetActive(false);
-            snowSliders.SetActive(true);
-            snowObject.SetActive(true);
+            //snowSliders.SetActive(true);
+            //snowObject.SetActive(true);
         }
     }
 }

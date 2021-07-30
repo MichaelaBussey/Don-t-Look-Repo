@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical") * percentMod;
 
         player_animator.SetFloat("Horizontal", movement.x);
-        player_animator.SetFloat("Vertical", movement.y);
+        player_animator.SetFloat("Vert", movement.y);
+
         player_animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
