@@ -19,8 +19,7 @@ public class Anxiety_Meter : MonoBehaviour
     public float shadowCD;
     public float maxCD;
 
-    
-
+    public AudioSource loseSound;
 
     void Start()
     {
@@ -29,10 +28,7 @@ public class Anxiety_Meter : MonoBehaviour
         environmentinfluence = 1;
 
         InvokeRepeating("AnxietyController", 0f, 0.25f); //AnxietyController is the method where the code increases anxiety. Will call this method once per second
-        
     }
-
-    
 
     public void Update()
     {
@@ -59,6 +55,7 @@ public class Anxiety_Meter : MonoBehaviour
         if (anxietyCurrent >= anxietyMaxAmount)
         {
             Losescreen.SetActive(true);
+            loseSound.Play();
             Time.timeScale = 0.0f;
         }
 
