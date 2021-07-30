@@ -7,7 +7,12 @@ using UnityEngine.SceneManagement;
 public class TextsandPause : MonoBehaviour
 {
     public GameObject Text1, Text2, PausePhone, PauseUI;
+    public GameObject help;
 
+    public void Start()
+    {
+        help.SetActive(false);
+    }
     void Update()
     {
         //causes all objects to freeze
@@ -18,7 +23,11 @@ public class TextsandPause : MonoBehaviour
 
         }
     }
-    
+
+    public void howtoplay()
+    {
+        help.SetActive(true);
+    }
     public void PausePhoneCanvas ()
     {
         Time.timeScale = 0.05f;
