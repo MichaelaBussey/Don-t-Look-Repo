@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
             this.transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             direction = (transform.position - target);
             Vector3.Normalize(direction);
-            Debug.Log(direction);
+            //Debug.Log(direction);
 
         }
         else if (state == AIState.STALK)
@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
             this.transform.position = Vector3.MoveTowards(transform.position, playerposition, speed * Time.deltaTime);
             direction = (transform.position - playerposition);
             Vector3.Normalize(direction);
-            Debug.Log(direction);
+            //Debug.Log(direction);
         }
 
 

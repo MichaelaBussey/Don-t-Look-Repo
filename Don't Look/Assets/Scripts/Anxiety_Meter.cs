@@ -86,7 +86,7 @@ public class Anxiety_Meter : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "light")
+        if (collision.gameObject.tag == "light" )
         {
             environmentinfluence = -3;
             this.gameObject.GetComponent<DetectionCircle>().underLight = true;
@@ -95,6 +95,7 @@ public class Anxiety_Meter : MonoBehaviour
 
         if (collision.gameObject.tag == "win")
         {
+            environmentinfluence = -3;
             Winscreen.SetActive(true);
             Time.timeScale = 0.0f;
         }

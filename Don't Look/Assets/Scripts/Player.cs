@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public Animator player_animator;
     public GameObject Text1, Text2, PauseUI;
 
+    public bool diagTest;
+
 
     void Start()
     {
@@ -29,6 +31,20 @@ public class Player : MonoBehaviour
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical") * percentMod;
+
+        //decreases diagonal movement if there is no 0 on one of the axes.
+        if (diagTest)
+        {
+
+            if (movement.x != 0 && movement.y != 0)
+            {  //therefore there is movement on both axes
+
+
+                movement.x = movement.x * 0.6f;
+                movement.y = movement.y * 0.6f;
+
+            }
+        }
 
         player_animator.SetFloat("Horizontal", movement.x);
         player_animator.SetFloat("Vert", movement.y);
