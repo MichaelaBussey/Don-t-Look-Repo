@@ -91,8 +91,31 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-                Anxiety_Meter anxiety_Meter = GameObject.FindWithTag("Player").GetComponent<Anxiety_Meter>();
-                anxiety_Meter.anxietyCurrent = 18;
+            Anxiety_Meter anxiety = collision.gameObject.GetComponent<Anxiety_Meter>();
+            anxiety.anxietyCurrent += 0.20f * anxiety.anxietyMaxAmount;
+
+            
+            if (anxiety.anxietyCurrent > anxiety.anxietyMaxAmount)
+            {
+                anxiety.anxietyCurrent = anxiety.anxietyMaxAmount;
+            }
+                
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Anxiety_Meter anxiety = collision.gameObject.GetComponent<Anxiety_Meter>();
+            anxiety.anxietyCurrent += 0.0025f * anxiety.anxietyMaxAmount;
+            
+
+            if (anxiety.anxietyCurrent > anxiety.anxietyMaxAmount)
+            {
+                anxiety.anxietyCurrent = anxiety.anxietyMaxAmount;
+            }
+
         }
     }
 

@@ -16,14 +16,37 @@ public class Anxiety_Meter : MonoBehaviour
     public float enemyinfluence;
     public float environmentinfluence;
 
+    public float shadowCD;
+    public float maxCD;
+
     void Start()
     {
         Time.timeScale = 1f;
         enemyinfluence = 0;
         environmentinfluence = 1;
 
-        InvokeRepeating("AnxietyController", 0f, 1.0f); //AnxietyController is the method where the code increases anxiety. Will call this method once per second
+        InvokeRepeating("AnxietyController", 0f, 0.25f); //AnxietyController is the method where the code increases anxiety. Will call this method once per second
         
+    }
+
+    public void Update()
+    {
+        if (this.gameObject.GetComponent<DetectionCircle>().underLight == false)
+        {
+            //player is in the darkness
+            shadowCD += 0.01f;
+
+
+            if (shadowCD >= 0.5 * maxCD && shadowCD < maxCD)
+            {
+                environmentinfluence = 2;
+            }
+            else if (shadowCD >= maxCD)
+            {
+                environmentinfluence = 3;
+            }
+            
+        }
     }
 
     public void FixedUpdate()
@@ -45,7 +68,16 @@ public class Anxiety_Meter : MonoBehaviour
 
     public void AnxietyController()
     {
-        anxietyCurrent += enemyinfluence + environmentinfluence;
+        anxietyCurrent += 0.25f * (enemyinfluence + environmentinfluence);
+
+        if (anxietyCurrent > anxietyMaxAmount)
+        { 
+            anxietyCurrent = anxietyMaxAmount;
+        }
+        else if (anxietyCurrent < 0)
+        {
+            anxietyCurrent = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,9 +85,9 @@ public class Anxiety_Meter : MonoBehaviour
 
         if (collision.gameObject.tag == "light")
         {
-            environmentinfluence = -5;
+            environmentinfluence = -3;
             this.gameObject.GetComponent<DetectionCircle>().underLight = true;
-            Debug.Log("Inlight");
+            
         }
 
         if (collision.gameObject.tag == "win")
@@ -69,9 +101,10 @@ public class Anxiety_Meter : MonoBehaviour
     {
         if (collision.gameObject.tag == "light")
         {
-            environmentinfluence = +2;
+            environmentinfluence = 1;
             this.gameObject.GetComponent<DetectionCircle>().underLight = false;
-            Debug.Log("OffLight");
+            shadowCD = 0;
+            
         }
     }
 
