@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     AudioSource enemyFootstep;
     public void Start()
     {
-        
+        enemyAnim = GetComponentInChildren<Animator>();
 
 
         state = AIState.IDLE;
