@@ -35,9 +35,12 @@ public class Enemy : MonoBehaviour
     public RaycastHit2D hit, hit2;
     public Vector3 target; //the transform details of the target position/player, which the enemy may or may not approach (depending on the type of enemy)
 
-
+    AudioSource enemyFootstep;
     public void Start()
     {
+        
+
+
         state = AIState.IDLE;
         if (type != EnemyType.LURKER)
         {
@@ -118,6 +121,7 @@ public class Enemy : MonoBehaviour
 
         }
     }
+
 
     public void Scan()
     {

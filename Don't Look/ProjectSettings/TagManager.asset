@@ -9,6 +9,7 @@ TagManager:
   - TEXT2COL
   - PAUSECOL
   - win
+  - enemyFootstep
   layers:
   - Default
   - TransparentFX
