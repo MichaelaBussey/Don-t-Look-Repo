@@ -36,6 +36,9 @@ public class Enemy : MonoBehaviour
     public Vector3 target; //the transform details of the target position/player, which the enemy may or may not approach (depending on the type of enemy)
     public Vector3 direction;
 
+
+    //ANIMATION STUFF
+    private Animator enemyAnim;
     AudioSource enemyFootstep;
     public void Start()
     {
@@ -96,7 +99,10 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Idle());
         }
 
+        enemyAnim.SetFloat("Horizontal", direction.x);
+        enemyAnim.SetFloat("Vert", direction.y);
 
+        enemyAnim.SetFloat("Speed", direction.sqrMagnitude);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
